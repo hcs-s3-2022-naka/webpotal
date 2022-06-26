@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+<script th:inline="javascript" th:src="@{/js/darkmode.js}">
+</script>
+
+<body class="light-mode">
+	<!-- common header bg-danger managed-link -->
+	<div th:replace="common :: common-nav"></div>
+	
+
+	<!-- contents -->
+	<div class="container">
+		<div class="content-box">
+			<h2>プロフィールを編集</h2>
+			
+			<div class="input-form">
+				<form method="post" th:action="@{/userProfile}"
+					th:object="${userProfile}">
+
+					<label for="user_id">ユーザID(メールアドレス)</label>
+					<p class="view-mail" th:text="*{user_id}"></p>
+					<input type="hidden" name="user_id" th:value="*{user_id}" th:field="*{user_id}">
+
+					<label for="user_name">ユーザ名</label>
+					<p th:text="*{user_name}"></p>
+					<input type="hidden" name="user_name" th:value="*{user_name}" th:field="*{user_name}">
+
+					<label for="nickname">表示名（ニックネーム）</label>
+					<div class="form-group input-box"
+						th:classappend="${#fields.hasErrors('nickname')} ? 'has-error'">
+						<input type="text" class="form-control" name="nickname"
+							placeholder="山ちゃん"  th:value="*{nickname}" th:field="*{nickname}"> <span
+							class="text-danger" th:if="${#fields.hasErrors('nickname')}"
+							th:errors="*{nickname}">nickname error</span>
+					</div>
+					
+					<label for="qualification">取得した資格</label>
+					<br>
+					<div class="form-check form-check-inline" th:each="item:${qualification}">
+						<input class="form-check-input" type="checkbox" name="qualifications" th:value="${item.key}" th:text="${item.value}" th:field="*{qualification}"/>
+					</div>
+					<br>
+					<label for="comment">自己紹介</label>
+					<div class="form-group input-box">
+						<textarea class="form-control" name="comment" rows="3" placeholder="かる～く自己紹介" 
+							id="comment" th:value="*{comment}" th:field="*{comment}"></textarea>
+						<span class="text-danger" th:if="${#fields.hasErrors('comment')}"
+							th:errors="*{comment}">comment error</span>
+					</div>
+
+					<button type="submit" class="btn btn-warning">登録</button>
+				</form>
+			</div>
+	
+		</div>
+	</div>
+
+</body>
+</html>

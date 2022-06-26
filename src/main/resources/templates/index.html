@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<body class="light-mode">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script type="text/javascript" src="/js/zipcode.js"></script>
+<script type="text/javascript" src="/js/index.js"></script>
+<script type="text/javascript" src="/js/weather.js"></script>
+
+	<div th:replace="common :: common-nav"></div>
+	<div class="container">
+		<div class="row">
+
+			<!-- 各種コンテンツ -->
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>住所検索 - 郵便番号</h2>
+					<form method="post" th:action="@{/zip}" onsubmit="return zipcodeCheck()">
+						<div class="input-group">
+							<input type="number" class="form-control" name="zipcode" id="zipcode"
+								placeholder="郵便番号 : XXXXXXX"> <span
+								class="input-group-btn">
+								<button id="zipcode" type="submit"
+									class="btn btn-success btnx-lime-non">検索</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>北海道の天気予報</h2>
+					<form method="post" th:action="@{/weather}" onsubmit="return citycodeCheck()">
+						<div class="input-group">
+							<select class="form-control" name="citycode" id="citycode">
+								<option value="016010">札幌</option>
+								<option value="012010">旭川</option>
+								<option value="011000">稚内</option>
+								<option value="012020">留萌</option>
+								<option value="013010">網走</option>
+								<option value="013020">北見</option>
+								<option value="013030">紋別</option>
+								<option value="014010">根室</option>
+								<option value="014020">釧路</option>
+								<option value="014030">帯広</option>
+								<option value="016020">岩見沢</option>
+								<option value="016030">倶知安</option>
+								<option value="017010">函館</option>
+								<option value="017020">江差</option>
+								<option value="015010">室蘭</option>
+								<option value="015020">浦河</option>
+							</select>
+								<span
+								class="input-group-btn">
+								<button id="citycode" type="submit"
+									class="btn btn-success btnx-lime-non">検索</button>
+							</span>
+						</div>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>直近のタスク</h2>
+					<div th:if="${taskEntity} != null">
+						<ul th:each="task : ${taskEntity.tasklist}" th:object="${task}">
+							<li><span th:text="*{comment}"></span></li>
+						</ul>
+					</div>
+					<hr>
+					<form method="post" th:action="@{/task/tasklist}">
+						<button type="submit" class="btn btn-success btnx-lime-non">タスク管理へ</button>
+					</form>
+				</div>
+			</div>
+			<div class="col-sm-6">
+				<div class="content-box">
+					<h2>飲食店検索 - 北海道</h2>
+					<form method="post" th:action="@{/gourmet}"  onsubmit="return isValidForGourmet()">
+						<div class="input-group">
+							<input type="text" class="form-control" name="shopname" id="shopname"
+								placeholder="店舗名 : 〇〇〇〇"> <span class="input-group-btn">
+								<button type="submit" class="btn btn-success btnx-lime-non">検索</button>
+							</span>
+						</div>
+					</form>
+					<span class="font">Powered by <a href="http://webservice.recruit.co.jp/">ホットペッパー Webサービス</a></span>
+				</div>
+			</div>
+			<div class="col-sm-6" role="presentation"
+				sec:authorize="hasRole('ADMIN') or hasRole('TOP')">
+				<!-- 管理者と上位のみのコンテンツ -->
+				<div class="content-box">
+					<h2>ユーザ管理</h2>
+					<form method="get" th:action="@{/user/userList}">
+						<button type="submit" class="btn btn-success btnx-lime-non">ユーザ管理へ</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

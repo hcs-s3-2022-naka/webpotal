@@ -1,0 +1,107 @@
+/*
+ 共通のCSS設定を記載.
+ 1ページにしか使わない設定は、各html内で直接styleタグで指定する.
+ */
+ 
+html {
+	height: 100%
+}
+body {
+	text-align: center;
+	background-color: #ffffff;
+}
+
+h1 {
+	font-family: 'arial black';
+}
+h2{
+	color: #000000;
+}
+
+.font{
+	color: #000000;
+}
+
+.container {
+	margin-top: 10px;
+}
+
+.content-box {
+	min-width: 250px;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: #F0EEEE;
+	border: 1px solid #C7C7C7;
+}
+
+.content-profile {
+	min-width: 250px;
+	margin: 5px;
+	padding: 20px;
+	border-radius: 150px;
+	background-color: #FFFFE080;
+	border: 1px solid #C7C7C7;
+}
+
+.content-box ul {
+	list-style: none;
+}
+
+.title-font {
+	font-size: 2rem;
+}
+
+.logo-img {
+	margin: 0px 10px 0px 5px;
+	width: 40px;
+}
+
+.config-img {
+	margin: 0 10px;
+	width: 20px;
+}
+
+.back-red {
+	background-color: red;
+}
+
+.button-logout {
+	position: fixed;
+	font-size: 1rem;
+	right: -15px;
+	top: 0px;
+}
+
+.input-form {
+	margin: 20px auto;
+	max-width: 600px;
+}
+
+.input-box {
+	margin-bottom: 30px;
+}
+
+.mode-dark {
+	color: black;
+	background-color: black;
+}
+
+.main-color {
+	background-color: #64C016 !important;
+}
+
+.btnx-lime {
+	background: #64C016;
+	border: 2px solid #64C016;
+}
+
+.btnx-lime-non {
+	color:  #64C016;
+	background: #FFFFFF;
+	border: 2px solid #64C016;
+}
+
+.title-font {
+	color: #64C016;
+}

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<body class="light-mode">
+	<!-- common header bg-danger managed-link -->
+	<div th:replace="common :: common-nav"></div>
+
+	<!-- contents -->
+	<div class="container">
+		<div class="content-box">
+			<h2><span th:text="${nickname}"></span>のプロフィール</h2>
+
+			<div class="input-form" th:object="${userProfile}">
+			<div class="row">
+				<div class="col-md-6">
+				<div class="content-profile">
+					<label for="user_id"><strong>ユーザID(メールアドレス)</strong></label>
+					<hr>
+					<p class="view-mail" th:text="*{user_id}"></p>
+					<input type="hidden" name="user_id" th:value="*{user_id}" th:field="*{user_id}">
+				</div>
+				</div>
+				<div class="col-md-6">
+				<div class="content-profile">
+					<label for="user_name"><strong>ユーザ名</strong></label>
+					<hr>
+					<p th:text="*{user_name}"></p>
+					<input type="hidden" name="user_name" th:value="*{user_name}" th:field="*{user_name}">
+				</div>
+				</div>
+				<div class="col-md-6">
+				<div class="content-profile">
+					<label for="nickname"><strong>表示名（ニックネーム）</strong></label>
+					<hr>
+					<p th:text="*{nickname}"></p>
+					<input type="hidden" name="nickname" th:value="*{nickname}" th:field="*{nickname}">
+				</div>
+				</div>
+				<div class="col-md-6">
+				<div class="content-profile">
+					<label for="qualification"><strong>取得した資格</strong></label>
+					<hr>
+					<div class="form-group input-box">
+						<input type="hidden" name="qualification" th:value="*{qualification}" th:text="*{#strings.replace(qualification, ',' ,'/')}"/>
+					</div>
+				</div>
+				</div>
+				<div class="col-md-12">
+				<div class="content-profile">
+					<label for="comment"><strong>自己紹介</strong></label>
+					<hr>
+					<p th:text="*{comment}"></p>
+					<input type="hidden" name="comment" th:value="*{comment}" th:field="*{comment}">
+					</div>
+				</div>
+				</div>
+				<br>
+				<form method="get" th:action="@{/profile}">
+					<button type="submit" class="btn btn-success btnx-lime-non">更新する</button>
+				</form>
+			</div>
+	
+		</div>
+	</div>
+
+</body>
+</html>

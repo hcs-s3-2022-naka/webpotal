@@ -1,0 +1,128 @@
+/* 「LIGHT」テーマのカラー設定 */
+:root,
+body.light-mode{
+  --color-container: #F0EEEE;
+  --color-main: #64C016;
+  --color-background: #FFFFFF;
+  --color-font:  #000000;
+}
+
+/* 「DARK」テーマのカラー設定 */
+body.dark-mode {
+  --color-container: #15181C;
+  --color-main: #1DA1F2;
+  --color-background: #222222;
+  --color-font: #FFFFFF;
+}
+
+/* 「MIDDLE」テーマのカラー設定 */
+:root[theme='MIDDLE'] {
+	--color-container: #ff0000;
+	--color-main: #0000ff;
+	--color-sub: #00ff00;
+}
+
+html{
+	height: 100%;
+}
+
+body {
+	text-align: center;
+	background-color: var(--color-background);
+}
+
+h1 {
+	font-family: 'arial black';
+}
+h2 {
+	color: var(--color-font);
+}
+
+.font {
+	color: var(--color-font);
+}
+
+.container {
+	margin-top: 10px;
+}
+
+.content-box {
+	min-width: 250px;
+	margin: 5px;
+	padding: 10px;
+	border-radius: 3px;
+	background-color: var(--color-container);
+	border: 1px solid #C7C7C7;
+}
+
+.content-profile {
+	min-width: 250px;
+	margin: 5px;
+	padding: 20px;
+	border-radius: 150px;
+	background-color: #FFFFE080;
+	border: 1px solid #C7C7C7;
+}
+
+.content-box ul {
+	list-style: none;
+}
+
+.title-font {
+	font-size: 2rem;
+}
+
+.logo-img {
+	margin: 0px 10px 0px 5px;
+	width: 40px;
+}
+
+.config-img {
+	margin: 0 10px;
+	width: 20px;
+}
+
+.back-red {
+	background-color: red;
+}
+
+.button-logout {
+	position: fixed;
+	font-size: 1rem;
+	right: -15px;
+	top: 0px;
+}
+
+.input-form {
+	margin: 20px auto;
+	max-width: 600px;
+}
+
+.input-box {
+	margin-bottom: 30px;
+}
+
+
+.mode-dark {
+	color: black;
+	background-color: black;
+}
+
+.main-color {
+	background-color: var(--color-main) !important;
+}
+
+.btnx-lime {
+	background: var(--color-main);
+	border: 2px solid var(--color-main);
+}
+
+.btnx-lime-non {
+	color:  var(--color-main);
+	background: var(--color-background);
+	border: 2px solid var(--color-main);
+}
+
+.title-font {
+	color: var(--color-main);
+}

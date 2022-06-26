@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<body class="light-mode">
+	<!-- common header -->
+	<div th:replace="common :: common-nav"></div>
+
+	<!-- contents -->
+	<div class="container">
+		<div class="content-box">
+			<h2>北海道グルメ</h2>
+			<h3>検索結果</h3>
+
+			<span th:text="${shopEntity.results_start}"></span> / <span
+				th:text="${shopEntity.results_available}"></span>
+
+			<div th:if="${#lists.isEmpty(shopEntity.shops)}">検索結果がありませんでした。</div>
+
+			<div th:each="shop : ${shopEntity.shops}" th:object="${shop}">
+				<hr>
+				<ul>
+					<li><img class="shopimage" th:src="*{logo_image}" /></li>
+					<li><a th:href="*{url}" target="new"><span
+							class="shopname" th:text="*{name}"></span></a></li>
+					<li><a
+						th:href="'https://www.google.com/maps/search/?api=1&query=' + *{address}"
+						target="new"><span th:text="*{address}"></span></a></li>
+					<li><span th:text="*{access}"></span></li>
+				</ul>
+			</div>
+
+			<div th:if="!${#lists.isEmpty(shopEntity.shops)}">
+				<form method="post" th:action="@{/gourmet}">
+						<div class="input-group">
+							<input type="hidden" class="form-control" name="shopname" th:value="${shopName}">
+							<input type="hidden" class="form-control" name="start" th:value="${start}">
+						<span class="input-group-btn">
+							<button type="submit" class="btn btn-success">次へ</button>
+						</span>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- common js -->
+	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script
+		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+</html>

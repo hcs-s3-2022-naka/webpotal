@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<script type="text/javascript" src="../static/js/index.js"></script>
+
+<body>
+
+	<div th:replace="common :: common-admin-nav"></div>
+
+	<!-- コンテンツ -->
+	<div class="container">
+		<div class="content-box">
+			<h2>ユーザ登録</h2>
+
+			<div class="input-form">
+				<form method="post" th:action="@{/user/userInsert}" th:object="${userForm}" class="needs-validation">
+
+					<label for="user_id">ユーザID(メールアドレス)</label>
+					<div class="form-group input-box position-relative">
+						<input type="text" class="form-control" name="user_id" th:value="*{user_id}" th:classappend="${#fields.hasErrors('user_id')} ? 'is-invalid'">
+						<div class="invalid-tooltip" th:if="${#fields.hasErrors('user_id')}" th:errors="*{user_id}"></div>
+					</div>
+
+					<label for="password">パスワード</label>
+					<div class="form-group input-box position-relative">
+						<input type="password" class="form-control" name="password" th:value="*{password}" th:classappend="${#fields.hasErrors('password')} ? 'is-invalid'">
+						<div class="invalid-tooltip" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
+					</div>
+
+					<label for="user_name">ユーザ名</label>
+					<div class="form-group input-box position-relative">
+						<input type="text" class="form-control" name="user_name" th:value="*{user_name}" th:classappend="${#fields.hasErrors('user_name')} ? 'is-invalid'">
+						<div class="invalid-tooltip" th:if="${#fields.hasErrors('user_name')}" th:errors="*{user_name}"></div>
+					</div>
+
+					<label for="role">権限</label>
+					<div class="form-group input-box position-relative">
+						<div>
+							<input type="radio" name="role" value="ROLE_GENERAL" id="role1" checked>一般
+						</div>
+						<div>
+							<input type="radio" name="role" value="ROLE_TOP" id="role2">上位
+						</div>
+						<div>
+							<input type="radio" name="role" value="ROLE_ADMIN" id="role3">管理
+						</div>
+						<div class="invalid-tooltip" th:if="${#fields.hasErrors('role')}" th:errors="*{role}"></div>
+					</div>
+
+					<button type="submit" class="btn btn-success">登録</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

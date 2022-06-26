@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<body class="light-mode">
+
+	<div th:replace="common :: common-nav"></div>
+
+	<!-- contents -->
+	<div class="container">
+		<div class="content-box">
+			<h2>タスク管理</h2>
+
+			<hr>
+
+			<form method="post" th:action="@{/task/insert}" onsubmit="return isValid()">
+				<div class="input-group">
+					<input type="text" class="form-control" name="title" id="title"
+						placeholder="タイトル">
+					<input type="datetime-local" class="form-control" name="limitday" id="limitday">
+					<span class="input-group-btn">
+						<select name="priority" class="form-control" id="priority">
+							<option value="1">大</option>
+							<option value="2">中</option>
+							<option value="3">小</option>
+						</select>
+					</span>
+					<span class="input-group-btn">
+						<button type="submit" class="btn btn-warning">追加</button>
+					</span>
+				</div>
+				<div class="input-group">
+					<input type="text" class="form-control" name="comment" id="comment"
+						placeholder="タスク内容">
+				</div>
+			</form>
+
+			<hr>
+
+			<table class="table table-hover table-striped table-responsive">
+				<tr>
+					<th class="text-nowrap">タイトル</th>
+					<th class="text-nowrap">優先度</th>
+					<th class="text-nowrap">内容</th>
+					<th class="text-nowrap">期限</th>
+				</tr>
+				<tr th:each="task : ${taskEntity.tasklist}" th:object="${task}">
+					<td class="text-nowrap"><a th:href="@{'/task/delete/' + *{id}}"
+					onclick="return confirm('完了したタスクを削除します。よろしいですか？')"> <span th:text="*{title}"></span>
+					</a></td>
+					<td class="text-nowrap" th:text="*{priority.value}">優先度</td>
+					<td class="text-nowrap" th:text="*{comment}">内容</td>
+					<td class="text-nowrap" th:text="*{limitday}">日付</td>
+				</tr>
+			</table>
+
+
+			<hr>
+
+			<form method="post" th:action="@{/task/csv}">
+				<button type="submit" class="btn btn-info">CSV出力</button>
+			</form>
+
+		</div>
+	</div>
+
+</body>
+</html>

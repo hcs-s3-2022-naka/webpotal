@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<script type="text/javascript" src="../static/js/index.js"></script>
+
+<body>
+
+	<div th:replace="common :: common-admin-nav"></div>
+
+	<!-- コンテンツ -->
+	<div class="container text-left">
+		<div class="content-box">
+
+			<h1>ユーザ一覧</h1>
+			<div class="alert alert-success" role="alert" th:if="${message}" th:text="${message}"></div>
+			<div class="alert alert-danger" role="alert" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+
+			<table class="table table-borderless table-responsive">
+				<tr>
+					<th class="table-dark">ユーザID(メールアドレス)</th>
+					<th class="table-dark">ユーザ名</th>
+					<th class="table-dark">アカウント有効性</th>
+					<th class="table-dark">権限</th>
+					<th class="table-dark"></th>
+				</tr>
+				<tr th:each="user : ${userEntity.userlist}" th:object="${user}">
+					<td class="table-light" th:text="*{user_id}"></td>
+					<td class="table-light" th:text="*{user_name}"></td>
+					<td class="table-light" th:text="*{enabled}"></td>
+					<td class="table-light" th:text="*{role}"></td>
+					<td class="table-light">
+						<form method="get" th:action="@{/user/detail}">
+							<input type="hidden" th:value="*{user_id}">
+							<button type="submit" class="btn btn-success btnx-lime-non">詳細</button>
+						</form>
+					</td>
+				</tr>
+			</table>
+
+			<div class="row" sec:authorize="hasRole('ADMIN')">
+				<form class="col" method="get" th:action="@{/user/delete}">
+					<button type="submit" class="btn btn-danger">一括削除</button>
+				</form>
+				<form class="col" method="get" th:action="@{/user/insert}">
+					<button type="submit" class="btn btn-primary">ユーザ作成</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

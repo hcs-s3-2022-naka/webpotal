@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+
+<div th:replace="common :: common-script"></div>
+<div th:replace="common :: common-head"></div>
+
+<body class="light-mode">
+	<div th:replace="common :: common-nav"></div>
+	
+	<div class="container">
+		<div class="content-box">
+			<h1><span th:text="${weatherEntity.cityCode}"></span>の天気予報</h1>
+			<ul th:each="forecast : ${weatherEntity.forecasts}">
+				<li><h4><span th:text="${forecast.dateLabel}"></span></h4></li>
+				<li><span th:text="${forecast.telop}"></span></li>
+				<li><img th:src="${forecast.image}"/></li>
+			</ul>
+				<hr>
+				<span th:text="${weatherEntity.description}"></span>
+		</div>
+	</div>
+</body>
+</html>
