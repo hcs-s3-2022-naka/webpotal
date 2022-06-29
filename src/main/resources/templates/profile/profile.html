@@ -9,11 +9,11 @@
 	<div th:replace="common :: common-nav"></div>
 
 	<!-- contents -->
-	<div class="container">
+	<div class="container" th:object="${userProfile}">
 		<div class="content-box">
-			<h2><span th:text="${nickname}"></span>のプロフィール</h2>
+			<h2><span th:text="*{nickname}"></span>のプロフィール</h2>
 
-			<div class="input-form" th:object="${userProfile}">
+			<div class="input-form">
 			<div class="row">
 				<div class="col-md-6">
 				<div class="content-profile">

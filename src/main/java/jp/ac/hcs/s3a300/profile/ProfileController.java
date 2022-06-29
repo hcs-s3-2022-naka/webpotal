@@ -59,8 +59,6 @@ public class ProfileController {
 		form.setNickname(data.getNickname());
 		form.setComment(data.getComment());
 		model.addAttribute("userProfile", form);
-		model.addAttribute("nickname", data.getNickname());
-
 		
 		return "profile/profile";
 	}
@@ -91,10 +89,15 @@ public class ProfileController {
 		}
 
 		log.info("[" + principal.getName() + "]ユーザプロフィール更新:" + profile.toString());
-		System.out.println(profile.getQualification());
+	
 		ProfileData data = new ProfileData();
 		data.setUser_id(profile.getUser_id());
-		data.setQualification(profile.getQualification());
+		
+		if (profile.getQualification() == null || profile.getQualification().equals("")) {
+			data.setQualification("取得資格がありません");
+		} else {
+			data.setQualification(profile.getQualification());
+		}
 		data.setNickname(profile.getNickname());
 		data.setComment(profile.getComment());
 		

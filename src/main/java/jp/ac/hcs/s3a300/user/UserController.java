@@ -95,7 +95,7 @@ public class UserController {
 		data.setUser_id(form.getUser_id());
 		data.setPassword(form.getPassword());
 		data.setUser_name(form.getUser_name());
-		data.setQualification("まだありません。");
+		data.setQualification("取得資格がありません");
 		data.setNickname("新規さん");
 		data.setComment("初めまして。よろしくお願いします。");
 		data.setRole(form.getRole());
